@@ -1,4 +1,7 @@
-﻿public class DuplicateCounter
+﻿using System;
+using System.Collections.Generic;
+
+public class DuplicateCounter
 {
     //Count how many duplicates are in a collection of data.
 
@@ -25,6 +28,30 @@
     private static int CountDuplicates(int[] data)
     {
         // Add code here.
-        return 0;
+        Dictionary<int, int> frequency = new Dictionary<int, int>();
+
+        foreach (int number in data)
+        {
+            if (frequency.ContainsKey(number))
+            {
+                frequency[number]++;
+            }
+            else
+            {
+                frequency[number] = 1;
+            }
+        }
+
+        int duplicateCount = 0;
+        foreach (var entry in frequency)
+        {
+            if (entry.Value > 1)
+            {
+                duplicateCount++;
+            }
+        }
+
+        return duplicateCount;
+        
     }
 }
