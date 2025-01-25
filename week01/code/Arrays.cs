@@ -37,7 +37,7 @@ public static class Arrays
     public static void RotateListRight(List<int> data, int amount)
     {
         // Plan:
-        // 1. Validate input: Ensure the list is not null or empty.
+        // 1. Validate input: Ensure the list is not null or empty, just in case...
         if (data == null || data.Count == 0) return;
 
         // 2. Calculate the effective rotation amount.
