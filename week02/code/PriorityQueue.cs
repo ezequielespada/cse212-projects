@@ -17,21 +17,26 @@
 
     public string Dequeue()
     {
-        if (_queue.Count == 0) // Verify the queue is not empty
+        if (_queue.Count == 0) // Verificar si la cola está vacía
         {
             throw new InvalidOperationException("The queue is empty.");
         }
-
-        // Find the index of the item with the highest priority to remove
+    
+        // Buscar el índice del elemento con la mayor prioridad
         var highPriorityIndex = 0;
-        for (int index = 1; index < _queue.Count - 1; index++)
+        for (int index = 1; index < _queue.Count; index++) 
         {
-            if (_queue[index].Priority >= _queue[highPriorityIndex].Priority)
+            // Si hay elementos con la misma prioridad, seleccionamos el primero añadido
+            if (_queue[index].Priority > _queue[highPriorityIndex].Priority ||
+                (_queue[index].Priority == _queue[highPriorityIndex].Priority && index < highPriorityIndex))
+            {
                 highPriorityIndex = index;
+            }
         }
-
-        // Remove and return the item with the highest priority
+    
+        // Eliminar el elemento con la mayor prioridad y devolver su valor
         var value = _queue[highPriorityIndex].Value;
+        _queue.RemoveAt(highPriorityIndex); // Eliminar el elemento de la cola
         return value;
     }
 
