@@ -3,7 +3,7 @@
     private List<PriorityItem> _queue = new();
 
     /// <summary>
-    /// Add a new value to the queue with an associated priority.  The
+    /// Add a new value to the queue with an associated priority. The
     /// node is always added to the back of the queue regardless of 
     /// the priority.
     /// </summary>
@@ -17,16 +17,16 @@
 
     public string Dequeue()
     {
-        if (_queue.Count == 0) // Verificar si la cola está vacía
+        if (_queue.Count == 0) // Check if the queue is empty
         {
             throw new InvalidOperationException("The queue is empty.");
         }
     
-        // Buscar el índice del elemento con la mayor prioridad
+        // Find the index of the item with the highest priority
         var highPriorityIndex = 0;
         for (int index = 1; index < _queue.Count; index++) 
         {
-            // Si hay elementos con la misma prioridad, seleccionamos el primero añadido
+            // If there are items with the same priority, select the first added
             if (_queue[index].Priority > _queue[highPriorityIndex].Priority ||
                 (_queue[index].Priority == _queue[highPriorityIndex].Priority && index < highPriorityIndex))
             {
@@ -34,9 +34,9 @@
             }
         }
     
-        // Eliminar el elemento con la mayor prioridad y devolver su valor
+        // Remove the item with the highest priority and return its value
         var value = _queue[highPriorityIndex].Value;
-        _queue.RemoveAt(highPriorityIndex); // Eliminar el elemento de la cola
+        _queue.RemoveAt(highPriorityIndex); // Remove the item from the queue
         return value;
     }
 
