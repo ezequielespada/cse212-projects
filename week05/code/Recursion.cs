@@ -183,17 +183,50 @@ public static class Recursion
     /// </summary>
     public static void SolveMaze(List<string> results, Maze maze, int x = 0, int y = 0, List<ValueTuple<int, int>>? currPath = null)
     {
-        // If this is the first time running the function, then we need
-        // to initialize the currPath list.
-        if (currPath == null) {
+        // Si es la primera vez que se ejecuta, inicializamos currPath
+        if (currPath == null)
+        {
             currPath = new List<ValueTuple<int, int>>();
         }
-        
-        // currPath.Add((1,2)); // Use this syntax to add to the current path
-
-        // TODO Start Problem 5
-        // ADD CODE HERE
-
-        // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
+    
+        // Agregamos la posición actual al camino
+        currPath.Add((x, y));
+    
+        // Si encontramos el final del laberinto, agregamos el camino actual a los resultados
+        if (maze.IsEnd(x, y))
+        {
+            results.Add(currPath.AsString());
+        }
+        else
+        {
+            // Intentamos movernos en las 4 direcciones: arriba, abajo, izquierda, derecha
+            // Arriba (x, y - 1)
+            if (maze.IsValidMove(currPath, x, y - 1))
+            {
+                SolveMaze(results, maze, x, y - 1, currPath);
+            }
+    
+            // Abajo (x, y + 1)
+            if (maze.IsValidMove(currPath, x, y + 1))
+            {
+                SolveMaze(results, maze, x, y + 1, currPath);
+            }
+    
+            // Izquierda (x - 1, y)
+            if (maze.IsValidMove(currPath, x - 1, y))
+            {
+                SolveMaze(results, maze, x - 1, y, currPath);
+            }
+    
+            // Derecha (x + 1, y)
+            if (maze.IsValidMove(currPath, x + 1, y))
+            {
+                SolveMaze(results, maze, x + 1, y, currPath);
+            }
+        }
+    
+        // Deshacemos el último movimiento para probar otras rutas (backtracking)
+        currPath.RemoveAt(currPath.Count - 1);
     }
+
 }
