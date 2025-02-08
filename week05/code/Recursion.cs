@@ -14,7 +14,17 @@ public static class Recursion
     /// </summary>
     public static int SumSquaresRecursive(int n)
     {
-        // TODO Start Problem 1
+        // TODO Start Problem 1 
+        
+            if (n <= 1)
+            {
+                // 1! = 1 (no recursion)
+                return 1;
+            }
+            else
+            {
+                // n = (n ^ (2))!
+            }
         return 0;
     }
 
